@@ -2,7 +2,7 @@
 # Evaluation Utilities (full)
 # ------------------------------
 
-library(infotheo)
+suppressPackageStartupMessages(library(infotheo))
 
 evaluate_features <- function(annot, mat_ori, mat_adj, mat_min,
                               group_col = "Black", group_num_col = "Black2",

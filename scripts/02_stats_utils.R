@@ -1,10 +1,10 @@
 # ------------------------------
 # Statistical Utilities
 # ------------------------------
-library(MASS)
-library(coin)
-library(effectsize)
-library(infotheo)
+suppressPackageStartupMessages(library(MASS))
+suppressPackageStartupMessages(library(coin))
+suppressPackageStartupMessages(library(effectsize))
+suppressPackageStartupMessages(library(infotheo))
 
 safe_ttest <- function(x, y) {
   if (length(unique(x)) > 1 && length(unique(y)) > 1) {

@@ -2,8 +2,8 @@
 # Data Loading Utilities
 # ------------------------------
 
-library(data.table)
-library(stringr)
+suppressPackageStartupMessages(library(data.table))
+suppressPackageStartupMessages(library(stringr))
 
 load_annotation <- function(file_path,
                             demographic_col = "Black",

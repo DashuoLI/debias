@@ -1,7 +1,7 @@
 # ------------------------------
 # LDA Utilities (complete)
 # ------------------------------
-library(MASS)
+suppressPackageStartupMessages(library(MASS))
 
 # Orthogonalize a vector `vec` against a list/matrix `basis`
 orthogonalize <- function(vec, basis) {
