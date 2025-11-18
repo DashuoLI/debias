@@ -32,9 +32,10 @@ make_nonnegative <- function(mat, annot, fullxx_zerovar, sample_id_col = "sample
   } else {
     mat_full <- mat
   }
+  dt <- as.data.frame(t(mat_full))
   # Shift each row so minimum is zero
-  row_mins <- apply(mat_full, 1, min, na.rm = TRUE)
-  t(t(mat_full) - row_mins)
+  row_mins <- apply(dt[, annot[[sample_id_col]]], 1, min, na.rm = TRUE)
+  sweep(dt, 1, row_mins, "-")
 }
 
 make_output_data_frame <- function(reconstructed) {

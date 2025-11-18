@@ -8,11 +8,11 @@ library(coin)
 library(effectsize)
 
 source("01_load_data.R")
-source("02_preprocess.R")
-source("03_pca_analysis.R")
-source("04_bias_model.R")
-source("05_apply_model.R")
-source("06_postprocess.R")
+source("02_stats_utils.R")
+source("03_pca_utils.R")
+source("04_lda_utils.R")
+source("05_reconstruction_utils.R")
+source("06_evaluation_utils.R")
 
 run_pipeline <- function(marker_file, marker_type, annot_file, split,
                          data_file,
@@ -37,7 +37,7 @@ run_pipeline <- function(marker_file, marker_type, annot_file, split,
   pca <- pca_res$pca
   colvar <- pca_res$colvar
   message("Finished PCA...")
-  
+
   # Full matrix scaling
   fullmat <- as.matrix(dt[markers, -1])
   fullxx <- t(fullmat)
@@ -72,16 +72,13 @@ run_pipeline <- function(marker_file, marker_type, annot_file, split,
   message("Finished reconstruction...")
 
   # Save
-  output_file <- paste0("step5.adjusted_", marker_type, 
+  output_file <- paste0("adjusted_", marker_type, 
                         ".select_pcs_criterion_", select_pcs_criterion, 
-                        "__padj_", padj_cutoff,
-                        "__pblack_", pblack_cutoff,
-                        "__ldap_", lda_p_cutoff, 
                         "__es_race_", es_race_cutoff,
                         "__es_black_", es_black_cutoff,
                         "__es_lda_", lda_es_cutoff,
                         "__signal_test_set_", signal_test_set,
-                        ".", split, ".csv.gz")
+                        ".csv.gz")
   fwrite(reconstructed_data_frame, output_file, row.names = F, col.names = T, sep = ",", quote = F, na = "NA")
   cat("adjusted data matrix written to:", output_file, "\n")
   message("Finished data output...")
